@@ -8,6 +8,7 @@ import log from "loglevel";
 import { Show } from "solid-js";
 import { isMobile, getBlacklist } from "../utils/helper";
 import FpJS from "@fingerprintjs/fingerprintjs";
+import { detectIncognito } from "detectincognitojs";
 import { createSignal, createEffect, onMount } from "solid-js";
 
 log.setLevel(config.loglevel as log.LogLevelDesc);
@@ -24,6 +25,7 @@ export const Hero = () => {
   const [fpHash, setFpHash] = createSignal("");
   const [blacklist, setBlacklist] = createSignal([]);
   const [isValid, setIsValid] = createSignal(false);
+  const [isPrivate, setIsPrivate] = createSignal(false);
 
   // Load fingerprint and blacklist on mount
   onMount(() => {
@@ -42,7 +44,16 @@ export const Hero = () => {
 
     getBlacklist()
       .then((list) => {
-        setBlacklist(list.split(" "));
+        if (list) {
+          setBlacklist(list.split(" "));
+        }
+      })
+      .catch(() => {});
+    
+    detectIncognito()
+      .then((result) => {
+          log.debug(result.browserName, result.isPrivate);
+          setIsPrivate(result.isPrivate);
       })
       .catch(() => {});
   });
@@ -51,10 +62,11 @@ export const Hero = () => {
   createEffect(() => {
     const hash = fpHash();
     const currentBlacklist = blacklist();
+    const privateMode = isPrivate();
 
     const valid =
       config.network !== "mainnet" ||
-      (isMobile() &&
+      (isMobile() && !privateMode &&
         secret() === config.secret &&
         !currentBlacklist.includes(hash));
 
