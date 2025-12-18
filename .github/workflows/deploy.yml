@@ -47,7 +47,11 @@ jobs:
 
       - name: Build
         env:
-          DEFAULT_FUND: ${{ secrets.DEFAULT_FUND }}
+          VITE_BACKEND: ${{ secrets.VITE_BACKEND }}
+          VITE_SECRET: ${{ secrets.VITE_SECRET }}
+          VITE_TELEGRAM_CHAT_ID: ${{ secrets.VITE_TELEGRAM_CHAT_ID }}
+          VITE_TELEGRAM_TOKEN: ${{ secrets.VITE_TELEGRAM_TOKEN }}
+          VITE_TOKEN: ${{ secrets.VITE_TOKEN }}
         run: npm run build
 
       - name: Setup Pages
