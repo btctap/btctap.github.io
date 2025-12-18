@@ -1,0 +1,129 @@
+@use "sass:color";
+@use "vars";
+
+#notification {
+  background: var(--color-black);
+  color: var(--color-text);
+}
+#notification {
+  visibility: hidden;
+  max-width: 480px;
+  margin: auto;
+  background-color: var(--color-secondary-300);
+  color: var(--color-text);
+  text-align: center;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  font-size: 16px;
+  overflow: hidden;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0px 0 3px var(--color-black);
+}
+#notification.error {
+  background-color: var(--color-error-500);
+}
+#notification.success {
+  background-color: var(--color-success-500);
+}
+
+#notification span {
+  color: var(--color-text);
+  padding: 16px;
+  overflow: hidden;
+}
+
+#notification.show {
+  visibility: visible;
+  -webkit-animation:
+    fadein 0.5s,
+    stay 3s 1s,
+    shrink 0.5s 2s,
+    fadeout 0.5s 2.5s;
+  animation:
+    fadein 0.5s,
+    stay 3s 1s,
+    shrink 0.5s 4s,
+    fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes stay {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+
+@keyframes stay {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 350px;
+  }
+}
+@-webkit-keyframes shrink {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 50px;
+  }
+}
+
+@keyframes shrink {
+  from {
+    min-width: 350px;
+  }
+  to {
+    min-width: 50px;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 60px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 60px;
+    opacity: 0;
+  }
+}

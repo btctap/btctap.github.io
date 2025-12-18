@@ -1,0 +1,2 @@
+TOKEN="your Coinos wallet's API token"
+SECRET="a secret that only NFC tags will know"
