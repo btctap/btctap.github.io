@@ -98,11 +98,11 @@ const Terms: Component = () => {
           Issues Page
         </a>
         . The maintainers will do their best to address them. Any questions
-        about the Wallet should be addressed to its respective maintaners.
+        about the Wallet should be addressed to its respective maintainers.
       </p>
 
       <p class="last-updated">
-        <strong>Last updated: December 18, 2025</strong>
+        <strong>Last updated: December 19, 2025</strong>
       </p>
     </div>
   );
