@@ -2,9 +2,9 @@ const dict = {
   en: {
     language: "English",
     headline: "Free Bitcoin",
-    subline: "Just for trying it out!",
+    subline: "Just for trying it out",
     description:
-      "We give away real satoshis so that you can learn using them as money within your community. A free web-based wallet will be created for you, just bookmark it and save your login/password. All we ask in return is that you try to pay with it in your favorite cafes. If an owner does not have a wallet, offer to send them a 'gift fund'. This will create a wallet for them too. Have fun with your new sats!",
+      "Congratulations on finding BTC Tap! We give away real satoshis so that you can learn using them as money within your community. A free web-based wallet will be created for you, just bookmark it in your browser. All we want in return is that you ask to pay with it in your favorite cafes. If an owner does not have a wallet, offer to send her a 'gift fund'. This will create a wallet the same way we now do it for you.",
     continue: "Please continue",
     api_offline_msg:
       "Could not connect to the wallet's API, please try again later",
@@ -17,13 +17,16 @@ const dict = {
     no_nfc: "NFC tag not detected",
     version: "Version",
     commithash: "Commit Hash",
+    terms: "Terms",
+    wallet: "Wallet",
+    map: "Map",
   },
   de: {
     language: "Deutsch",
     headline: "Kostenloser Bitcoin",
     subline: "Nur um es auszuprobieren!",
     description:
-      "Wir verschenken echte Satoshis, damit Sie lernen können, sie in Ihrer Gemeinschaft als Geld zu verwenden. Eine kostenlose webbasierte Geldbörse wird für Sie erstellt; markieren Sie sie einfach und speichern Sie Ihren Login/Passwort. Alles, was wir im Gegenzug verlangen, ist, dass Sie versuchen, damit in Ihren Lieblingscafés zu bezahlen. Wenn ein Besitzer keine Geldbörse hat, bieten Sie an, ihm einen 'Geschenkkapital' zu senden. Das wird auch für ihn eine Geldbörse erstellen. Viel Spaß mit Ihren neuen Sats!",
+      "Herzlichen Glückwunsch, dass Sie BTC Tap gefunden haben! Wir verschenken echte Satoshis, damit Sie lernen, sie in Ihrer Gemeinschaft als Geld zu verwenden. Eine kostenlose webbasierte Geldbörse wird für Sie erstellt; speichern Sie sie einfach in Ihrem Browser. Alles, was wir im Gegenzug möchten, ist, dass Sie in Ihren Lieblingscafés darum bitten, damit zu bezahlen. Wenn ein Besitzer keine Geldbörse hat, bieten Sie an, ihr einen „Geschenkfonds“ zu senden. Dadurch wird eine Geldbörse auf die gleiche Weise erstellt, wie wir es jetzt für Sie tun.",
     continue: "Bitte fahren Sie fort",
     api_offline_msg:
       "Es konnte keine Verbindung zur API der Wallet hergestellt werden. Bitte versuchen Sie es später erneut.",
@@ -37,13 +40,16 @@ const dict = {
     no_nfc: "NFC-Tag nicht erkannt",
     version: "Version",
     commithash: "Commit Hash",
+    terms: "Nutzungsbedingungen",
+    wallet: "Geldbörse",
+    map: "Karte",
   },
   es: {
     language: "Español",
     headline: "Bitcoin gratis",
-    subline: "¡Solo para probarlo!",
+    subline: "Para que puedas probar",
     description:
-      "Regalamos satoshis reales para que puedas aprender a usarlos como dinero dentro de tu comunidad. Se creará una billetera web gratuita para ti; simplemente guárdala como un marcador y guarda tu usuario/contraseña. Todo lo que pedimos a cambio es que intentes pagar con ella en tus cafeterías favoritas. Si un dueño no tiene una billetera, ofrécele enviarle un 'fondo de regalo'. Esto también creará una billetera para ellos. ¡Diviértete con tus nuevos sats!",
+      "¡Felicitaciones por encontrar BTC Tap! Regalamos satoshis reales para que puedas aprender a usarlos como dinero dentro de tu comunidad. Se creará una cartera web gratuita para ti; solo guárdala en tu navegador. Lo único que pedimos a cambio es que pidas pagar con ella en tus cafeterías favoritas. Si un dueño no tiene una cartera, ofrécele enviarle un 'fondo de regalo'. Esto creará una cartera de la misma manera que lo estamos haciendo ahora por ti.",
     continue: "Por favor, continúe",
     api_offline_msg:
       "No se pudo conectar a la API de la billetera, inténtelo nuevamente más tarde",
@@ -56,13 +62,16 @@ const dict = {
     no_nfc: "Etiqueta NFC no detectada",
     version: "Versión",
     commithash: "Commit Hash",
+    terms: "Términos",
+    wallet: "Cartera",
+    map: "Mapa",
   },
   pt: {
     language: "Português",
     headline: "Bitcoin grátis",
-    subline: "Apenas para experimentá-lo!",
+    subline: "Apenas para experimentá-lo",
     description:
-      "Damos satoshis reais para que você possa aprender a usá-los como dinheiro dentro da sua comunidade. Uma carteira baseada na web gratuita será criada para você; basta marcá-la e salvar seu login/senha. Tudo o que pedimos em troca é que você tente pagar com ela em seus cafés favoritos. Se um proprietário não tiver uma carteira, ofereça enviar um 'fundo de presente'. Isso também criará uma carteira para eles. Divirta-se com seus novos sats!",
+      "Parabéns por encontrar o BTC Tap! Nós damos satoshis reais para que você possa aprender a usá-los como dinheiro dentro da sua comunidade. Uma carteira baseada na web será criada para você; basta adicioná-la aos favoritos do seu navegador. Tudo o que queremos em troca é que você peça para pagar com ela em seus cafés favoritos. Se um proprietário não tiver uma carteira, ofereça-se para enviar um 'fundo de presente'. Isso criará uma carteira da mesma forma que agora estamos fazendo por você.",
     continue: "Por favor, continue",
     api_offline_msg:
       "Não foi possível conectar à API da carteira. Tente novamente mais tarde.",
@@ -75,13 +84,16 @@ const dict = {
     no_nfc: "Etiqueta NFC não detectada",
     version: "Versão",
     commithash: "Hash do Commit",
+    terms: "Termos",
+    wallet: "Carteira",
+    map: "Mapa",
   },
   zh: {
     language: "中文",
     headline: "免费比特币",
-    subline: "只是为了试试看！",
+    subline: "只是为了试试看",
     description:
-      "我们赠送真实的satoshi，让您可以在您的社区中学习如何将其作为货币使用。将为您创建一个免费的网络钱包，只需将其收藏并保存您的登录/密码。我们唯一的要求是您尝试在您最喜欢的咖啡馆用它支付。如果店主没有钱包，可以建议发送给他们一个“礼品基金”。这也会为他们创建一个钱包。享受您的新sats吧！",
+      "祝贺你找到BTC Tap！我们赠送真实的Satoshi，以便你能在自己的社区中学习如何用它们作为货币。我们将为你创建一个免费的网络钱包，只需将其添加到浏览器书签中。我们希望的唯一回报是，你能够在自己喜欢的咖啡馆里要求用它付款。如果某位店主没有钱包，请提议给她发送一个“礼品基金”。这样会以我们现在为你创建钱包的方式来创建一个钱包。",
     continue: "请继续",
     api_offline_msg: "无法连接到钱包的 API，请稍后重试。",
     not_found: "404 - 页面未找到",
@@ -93,13 +105,16 @@ const dict = {
     no_nfc: "未检测到NFC标签",
     version: "版本",
     commithash: "提交哈希",
+    terms: "条款",
+    wallet: "钱包",
+    map: "地图",
   },
   ja: {
     language: "日本語",
     headline: "無料のビットコイン",
-    subline: "試してみるためだけに！",
+    subline: "試してみるためだけに",
     description:
-      "私たちは、本物のサトシを配布し、あなたがコミュニティ内でそれらをお金として使うことを学べるようにしています。無料のウェブベースのウォレットがあなたのために作成されますので、それをブックマークしてログイン情報/パスワードを保存してください。お返しにお願いしたいのは、お気に入りのカフェでそれを使って支払ってみることです。オーナーがウォレットを持っていない場合は、「ギフトファンド」を送ることを提案してください。これにより、彼らのためにもウォレットが作成されます。新しいサトシと楽しんでください！",
+      "BTC Tapを見つけたことをお祝いします！私たちは、あなたがコミュニティ内でお金として使う方法を学ぶために本物のサトシを配布します。あなたのために無料のウェブベースの財布が作成され、ブラウザにブックマークするだけです。私たちが求めているのは、お気に入りのカフェでそれを使って支払うように頼むことだけです。オーナーが財布を持っていない場合は、彼女に「ギフトファンド」を送ることを提案してください。これにより、今私たちがあなたのために行っているのと同じ方法で財布が作成されます。",
     continue: "続けてください",
     api_offline_msg:
       "ウォレットのAPIに接続できませんでした。しばらくしてからもう一度お試しください。",
@@ -112,13 +127,16 @@ const dict = {
     no_nfc: "NFCタグが検出されませんでした",
     version: "バージョン",
     commithash: "コミットハッシュ",
+    terms: "利用規約",
+    wallet: "財布",
+    map: "地図",
   },
   ru: {
     language: "Русский",
     headline: "Бесплатные биткоины",
-    subline: "Просто, чтобы вы попробовали!",
+    subline: "Просто, чтобы вы попробовали",
     description:
-      "Мы раздаем настоящие сатоши, чтобы вы могли научиться использовать их как деньги в вашем сообществе. Для вас будет создан бесплатный веб-кошелек; просто добавьте его в закладки и сохраните свой логин/пароль. Единственное, что мы просим взамен — попытаться расплатиться им в ваших любимых кафе. Если у владельца нет кошелька, предложите отправить ему «подарочный фонд». Это создаст кошелек для них, как и у вас. Наслаждайтесь вашими новыми сатоши!",
+      "Поздравляем с тем, что вы нашли BTC Tap! Мы раздаем настоящие сатоши, чтобы вы могли научиться использовать их как деньги в своем сообществе. Для вас будет создан бесплатный веб-кошелек, просто добавьте его в закладки в вашем браузере. Все, что мы хотим взамен, — это чтобы вы просили расплатиться им в своих любимых кафе. Если у владельца нет кошелька, предложите отправить ей «подарочный фонд». Это создаст кошелек таким же образом, как мы сейчас сделаем это для вас.",
     continue: "Прошу продолжить",
     api_offline_msg:
       "Не удалось подключиться к API кошелька. Пожалуйста, попробуйте позже.",
@@ -131,6 +149,9 @@ const dict = {
     no_nfc: "NFC-метка не обнаружена",
     version: "Версия",
     commithash: "Хэш коммита",
+    terms: "Условия",
+    wallet: "Кошелек",
+    map: "Карта",
   },
 };
 

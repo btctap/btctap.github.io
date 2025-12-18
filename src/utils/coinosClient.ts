@@ -92,7 +92,7 @@ export const payToFund = async (
   fundId: string,
   amountSat: number,
 ): Promise<Transaction> => {
-  const res = await fetcher<Transaction>(config.backend, "payments", {
+  const res = await fetcher<Transaction>(true, config.backend, "payments", {
     fund: fundId,
     amount: amountSat,
   });
@@ -102,12 +102,16 @@ export const payToFund = async (
 
 // get fund's balance and history
 export const getFund = async (fundId): Promise<FundResponse> => {
-  const res = await fetcher<FundResponse>(config.backend, "fund/" + fundId);
+  const res = await fetcher<FundResponse>(
+    false,
+    config.backend,
+    "fund/" + fundId,
+  );
   return res;
 };
 
 // get account balance and details
 export const getMe = async (): Promise<UserProfile> => {
-  const res = await fetcher<UserProfile>(config.backend, "me",{});
+  const res = await fetcher<UserProfile>(true, config.backend, "me");
   return res;
 };

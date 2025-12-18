@@ -48,10 +48,6 @@ nav a.active {
   font-size: 12px;
   z-index: 1;
 }
-#network[boltz-theme="pro"] {
-  color: var(--color-secondary-700);
-  background: var(--color-primary);
-}
 
 #languages {
   position: relative;
@@ -107,19 +103,12 @@ nav a.active {
     var(--color-primary-lighter) 10%,
     var(--color-primary) 90%
   );
-  mask: url("../assets/boltz.svg") no-repeat center;
+  mask: url("../assets/logo.svg") no-repeat center;
   mask-size: contain;
 
   /* For Safari */
-  -webkit-mask: url("../assets/boltz.svg") no-repeat center;
+  -webkit-mask: url("../assets/logo.svg") no-repeat center;
   -webkit-mask-size: contain;
-}
-#logo-mask[boltz-theme="pro"] {
-  background: linear-gradient(
-    180deg,
-    var(--color-secondary-200) 10%,
-    var(--color-secondary-300) 90%
-  );
 }
 #logo {
   z-index: 1;

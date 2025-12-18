@@ -13,6 +13,7 @@ const defaults = {
   giftAmount: 1,
   repoUrl: "https://github.com/btctap/btctap.github.io",
   mapUrl: "https://btcmap.org",
+  walletUrl: "https://coinos.io",
 };
 
 const baseConfig: Config = defaults;

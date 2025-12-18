@@ -1,16 +1,20 @@
 import { A } from "@solidjs/router";
 import { BsGlobe } from "solid-icons/bs";
-import { For, Show } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
+import { OcLinkexternal2 } from "solid-icons/oc";
 
 import logo from "../assets/logo.svg";
 import { useGlobalContext } from "../context/Global";
 import locales from "../i18n/i18n";
 import "../style/nav.scss";
+import { config } from "../config";
 
 const Nav = (props: { network: string }) => {
   let timeout: ReturnType<typeof setTimeout> | undefined;
 
-  const { setI18nConfigured } = useGlobalContext();
+  const { setI18nConfigured, t } = useGlobalContext();
+  const [hamburger, setHamburger] = createSignal(false);
+
   return (
     <nav>
       <div class="nav-inner">
@@ -49,6 +53,40 @@ const Nav = (props: { network: string }) => {
             </For>
           </div>
         </div>
+        <div id="collapse" class={hamburger() ? "active" : ""}>
+          <A href="/terms" onClick={() => setHamburger(false)}>
+            {t("terms")}
+          </A>
+          <Show when={config.walletUrl}>
+            <a class="external" target="_blank" href={config.walletUrl}>
+              {t("wallet")}
+              <OcLinkexternal2 size={23} />
+            </a>
+          </Show>
+          <Show when={config.mapUrl}>
+            <a class="external" target="_blank" href={config.mapUrl}>
+              {t("map")}
+              <OcLinkexternal2 size={23} />
+            </a>
+          </Show>
+        </div>
+        <svg
+          id="hamburger"
+          viewBox="0 0 100 100"
+          width="45"
+          class={hamburger() ? "active" : ""}
+          onClick={() => setHamburger(!hamburger())}
+        >
+          <path
+            class="line top"
+            d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20"
+          />
+          <path class="line middle" d="m 70,50 h -40" />
+          <path
+            class="line bottom"
+            d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20"
+          />
+        </svg>
       </div>
     </nav>
   );

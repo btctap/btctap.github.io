@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import Error from "./pages/Error";
 import Hero from "./pages/Hero";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import Notification from "./components/Notification";
 
@@ -28,7 +29,7 @@ if ("serviceWorker" in navigator) {
 }
 
 log.setLevel(config.loglevel as log.LogLevelDesc);
-document.documentElement.setAttribute("boltz-theme", "default");
+document.documentElement.setAttribute("theme", "default");
 document.body.classList.remove("loading");
 
 // change to publish to /testnet etc
@@ -49,6 +50,7 @@ const cleanup = render(
   () => (
     <Router root={App} base={base}>
       <Route path="/" component={Hero} />
+      <Route path="/terms" component={Terms} />
       <Route path="/error" component={() => <Error />} />
       <Route path="*404" component={NotFound} />
     </Router>

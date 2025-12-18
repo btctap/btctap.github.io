@@ -617,12 +617,6 @@ textarea.invalid {
   transform: scale(1.5);
 }
 
-[data-denominator="btc"] {
-  background-image: url(../assets/btc.svg);
-}
-[data-denominator="sat"] {
-  background-image: url(../assets/sat.svg);
-}
 .denomination .active {
   filter: none;
   border-radius: 50%;
@@ -835,10 +829,6 @@ textarea.invalid {
 .btn-inline {
   display: inline-block;
   width: auto;
-}
-.network-fee,
-.boltz-fee {
-  margin-right: 4px;
 }
 
 .globe {

@@ -7,6 +7,7 @@ import { send } from "../utils/telegram";
 import log from "loglevel";
 import { Show } from "solid-js";
 import { isMobile } from "../utils/helper";
+import FpJS from "@fingerprintjs/fingerprintjs";
 
 log.setLevel(config.loglevel as log.LogLevelDesc);
 
@@ -16,8 +17,17 @@ const redirect = (loc: string) => {
 };
 
 export const Hero = () => {
-  const { id, fund, secret, setFund, setNotification, setNotificationType, t } =
-    useGlobalContext();
+  const {
+    id,
+    fund,
+    secret,
+    setFund,
+    setNotification,
+    setNotificationType,
+    fpHash,
+    setFpHash,
+    t,
+  } = useGlobalContext();
 
   const handleClick = () => {
     if (fund()) {
@@ -51,23 +61,23 @@ export const Hero = () => {
         .then((data) => {
           if (data) {
             // save the fund id as a cookie
-            setFund(fundId);         
+            setFund(fundId);
             // get remaining balance
             let myBalance = 0;
             getMe()
               .then((data) => {
-                myBalance=data.balance;
+                myBalance = data.balance;
               })
               .catch((error) => {
                 log.error("Error getting me:", error);
               })
               .finally(() => {
                 // send a telegram
-                const telegram_message = `Id: ${id()}\nFund: ${fund()}\nPaid: ${amount}\nBalance: ${myBalance}`;
+                const telegram_message = `Fp: ${fpHash()}\nId: ${id()}\nFund: ${config.backend}/fund/${fund()}\nPaid: ${amount}\nBalance: ${myBalance}`;
                 send(telegram_message);
                 // redirect to sweep
                 redirect(`https://${config.backend}/fund/${fund()}/sweep`);
-              })
+              });
           }
         })
         .catch((error) => {
@@ -75,34 +85,44 @@ export const Hero = () => {
           // redirect to Coinos main page
           setNotificationType("error");
           setNotification(t("api_offline_msg"));
+          // send a telegram
+          send(`Error: ${error}`);
         });
     }
   };
 
-  const isValid = () => {
-    return isMobile() && secret() == config.secret;
+  const tagDetected = () => {
+    return (
+      config.network != "mainnet" || (isMobile() && secret() == config.secret)
+    );
+  };
+
+  if (!fpHash()) {
+    FpJS.load()
+      .then((fp) => {
+        fp.get()
+          .then((result) => {
+            setFpHash(result.visitorId);
+          })
+          .catch(() => {});
+      })
+      .catch(() => {});
   }
 
   return (
     <div id="hero" class="inner-wrap">
-      <h1>
-        {t("headline")}
-      </h1>
-      <h2>
-        {t("subline")}
-      </h2>
-      <br/>
+      <h1>{t("headline")}</h1>
+      <h2>{t("subline")}</h2>
+      <br />
       <p>{t("description")}</p>
-      <br/>
-      <Show when={isValid()}>
+      <br />
+      <Show when={tagDetected()}>
         <span class="btn btn-inline" onClick={() => handleClick()}>
           {t("continue")}
         </span>
       </Show>
-      <Show when={!isValid()}>
-        <h3>
-          {t("no_nfc")}
-        </h3>
+      <Show when={!tagDetected()}>
+        <h3>{t("no_nfc")}</h3>
       </Show>
     </div>
   );

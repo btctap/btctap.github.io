@@ -1,8 +1,4 @@
-$lightning_icon: url(../assets/lightning-icon.svg);
-$bitcoin_icon: url(../assets/bitcoin-icon.svg);
-$liquid_icon: url(../assets/liquid-icon.svg);
-$rootstock_icon: url(../assets/rootstock-icon.svg);
-$boltz_icon: url(/boltz-icon.svg);
+$btctap_icon: url(/icon.svg);
 
 :root {
   --border-radius-sm: 8px;
@@ -84,7 +80,7 @@ $boltz_icon: url(/boltz-icon.svg);
   --color-shadow-blue-dark: rgba(0, 44, 176, 0.04);
 }
 
-:root[boltz-theme="default"] {
+:root[theme="default"] {
   --color-primary: #e8cb2b;
   --color-primary-lighter: #fee86b;
   --color-primary-glow: color-mix(
@@ -123,7 +119,7 @@ $boltz_icon: url(/boltz-icon.svg);
   );
 }
 
-:root[boltz-theme="pro"] {
+:root[theme="pro"] {
   --color-primary: #c47835;
   --color-primary-glow: color-mix(
     in srgb,

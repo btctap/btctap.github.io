@@ -14,6 +14,7 @@ export const getApiUrl = (backend: string): string => {
 };
 
 export const fetcher = async <T = unknown>(
+  withAuth: boolean,
   backend: string,
   url: string,
   params?: Record<string, unknown>,
@@ -29,15 +30,14 @@ export const fetcher = async <T = unknown>(
       signal: controller.signal,
     };
 
-    if (params) {
+    if (withAuth) {
       opts = {
-        method: "POST",
         headers: {
-          Authorization: "Bearer " + import.meta.env.VITE_TOKEN,
+          Authorization: "Bearer " + config.token,
           "Content-Type": "application/json",
         },
         signal: controller.signal,
-        body: JSON.stringify(params),
+        ...(params ? { method: "POST", body: JSON.stringify(params) } : null),
       };
     }
 
