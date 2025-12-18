@@ -53,9 +53,20 @@ jobs:
           VITE_TELEGRAM_TOKEN: ${{ secrets.VITE_TELEGRAM_TOKEN }}
           VITE_TOKEN: ${{ secrets.VITE_TOKEN }}
         run: npm run build
-
+        
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: '${{ github.workspace }}/dist'
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload dist folder
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
