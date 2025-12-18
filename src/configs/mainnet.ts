@@ -8,7 +8,7 @@ const config = {
   backend: import.meta.env.VITE_BACKEND,
   token: import.meta.env.VITE_TOKEN,
   secret: import.meta.env.VITE_SECRET,
-  loglevel: "debug" as log.LogLevelDesc,
+  loglevel: "info" as log.LogLevelDesc,
 } as Config;
 
 export { config };

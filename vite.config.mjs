@@ -6,7 +6,7 @@ import mkcert from "vite-plugin-mkcert";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import solidPlugin from "vite-plugin-solid";
 import topLevelAwait from "vite-plugin-top-level-await";
-import vitePluginBundleObfuscator from 'vite-plugin-bundle-obfuscator';
+import vitePluginBundleObfuscator from "vite-plugin-bundle-obfuscator";
 
 const commitHash = child
   .execSync("git rev-parse --short HEAD")
@@ -35,7 +35,7 @@ const defaultObfuscatorConfig = {
     debugProtection: false,
     debugProtectionInterval: 0,
     disableConsoleOutput: true,
-    identifierNamesGenerator: 'hexadecimal',
+    identifierNamesGenerator: "hexadecimal",
     log: false,
     numbersToExpressions: false,
     renameGlobals: false,
@@ -52,10 +52,10 @@ const defaultObfuscatorConfig = {
     stringArrayWrappersCount: 1,
     stringArrayWrappersChainedCalls: true,
     stringArrayWrappersParametersMaxCount: 2,
-    stringArrayWrappersType: 'function',
+    stringArrayWrappersType: "function",
     stringArrayThreshold: 0.75,
     unicodeEscapeSequence: false,
-  }
+  },
 };
 
 if (!fs.existsSync(configFile)) {
@@ -78,7 +78,7 @@ export default defineConfig({
     topLevelAwait(),
     mkcert(),
     nodePolyfills(),
-    vitePluginBundleObfuscator(defaultObfuscatorConfig)
+    vitePluginBundleObfuscator(defaultObfuscatorConfig),
   ],
   resolve: {
     alias: {

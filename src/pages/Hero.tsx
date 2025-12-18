@@ -6,7 +6,7 @@ import { getFund, getMe, payToFund } from "../utils/coinosClient";
 import { send } from "../utils/telegram";
 import log from "loglevel";
 import { Show } from "solid-js";
-import { isMobile } from "../utils/helper";
+import { isMobile, getBlacklist } from "../utils/helper";
 import FpJS from "@fingerprintjs/fingerprintjs";
 
 log.setLevel(config.loglevel as log.LogLevelDesc);
@@ -26,6 +26,8 @@ export const Hero = () => {
     setNotificationType,
     fpHash,
     setFpHash,
+    blacklist,
+    setBlacklist,
     t,
   } = useGlobalContext();
 
@@ -91,23 +93,31 @@ export const Hero = () => {
     }
   };
 
-  const tagDetected = () => {
-    return (
-      config.network != "mainnet" || (isMobile() && secret() == config.secret)
-    );
-  };
-
   if (!fpHash()) {
     FpJS.load()
       .then((fp) => {
         fp.get()
           .then((result) => {
+            log.debug(result.visitorId);
             setFpHash(result.visitorId);
           })
           .catch(() => {});
       })
       .catch(() => {});
   }
+
+  getBlacklist()
+    .then((list) => {
+      setBlacklist(list.split(" "));
+    })
+    .catch(() => {});
+
+  const isValid = () => {
+    return (
+      config.network != "mainnet" ||
+      (isMobile() && secret() == config.secret && !(fpHash() in blacklist()))
+    );
+  };
 
   return (
     <div id="hero" class="inner-wrap">
@@ -116,12 +126,12 @@ export const Hero = () => {
       <br />
       <p>{t("description")}</p>
       <br />
-      <Show when={tagDetected()}>
+      <Show when={isValid()}>
         <span class="btn btn-inline" onClick={() => handleClick()}>
           {t("continue")}
         </span>
       </Show>
-      <Show when={!tagDetected()}>
+      <Show when={!isValid()}>
         <h3>{t("no_nfc")}</h3>
       </Show>
     </div>

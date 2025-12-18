@@ -42,6 +42,8 @@ export type GlobalContextType = {
   setNotificationType: Setter<string>;
   fpHash: Accessor<string>;
   setFpHash: Setter<string>;
+  blacklist: Accessor<string[]>;
+  setBlacklist: Setter<string[]>;
   // functions
   t: tFn;
   notify: notifyFn;
@@ -74,6 +76,8 @@ const GlobalProvider = (props: { children: JSX.Element }) => {
       name: "fp",
     },
   );
+
+  const [blacklist, setBlacklist] = createSignal<string[]>([]);
 
   const [fund, setFund] = makePersisted(
     // eslint-disable-next-line solid/reactivity
@@ -158,6 +162,8 @@ const GlobalProvider = (props: { children: JSX.Element }) => {
         setSecret,
         fpHash,
         setFpHash,
+        blacklist,
+        setBlacklist,
         // functions
         t,
         notify,

@@ -13,6 +13,45 @@ export const getApiUrl = (backend: string): string => {
   return "https://" + backend + "/api/";
 };
 
+export const getBlacklist = async (): Promise<string> => {
+  const controller = new AbortController();
+  const requestTimeout = setTimeout(
+    () => controller.abort({ reason: "Request timed out" }),
+    requestTimeoutDuration,
+  );
+
+  try {
+    const opts: RequestInit = {
+      signal: controller.signal,
+    };
+
+    const response = await fetch(
+      "/blacklist.txt",
+      opts,
+    );
+
+    if (!response.ok) {
+      try {
+        const contentType = response.headers.get("content-type");
+        if (contentType?.includes("application/json")) {
+          const body = await response.json();
+          return Promise.reject(formatError(body));
+        }
+        return Promise.reject(await response.text());
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (e) {
+        return Promise.reject(response);
+      }
+    }
+    return await response.text();
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    clearTimeout(requestTimeout);
+  }
+};
+
 export const fetcher = async <T = unknown>(
   withAuth: boolean,
   backend: string,

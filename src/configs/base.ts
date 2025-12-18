@@ -12,6 +12,7 @@ const defaults = {
   defaultLanguage: "en",
   giftAmount: 1,
   repoUrl: "https://github.com/btctap/btctap.github.io",
+  myUrl: "https://btctap.github.io",
   mapUrl: "https://btcmap.org",
   walletUrl: "https://coinos.io",
 };
