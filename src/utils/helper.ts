@@ -25,10 +25,7 @@ export const getBlacklist = async (): Promise<string> => {
       signal: controller.signal,
     };
 
-    const response = await fetch(
-      "/blacklist.txt",
-      opts,
-    );
+    const response = await fetch("/blacklist.txt", opts);
 
     if (!response.ok) {
       try {

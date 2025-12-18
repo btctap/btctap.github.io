@@ -8,6 +8,7 @@ import log from "loglevel";
 import { Show } from "solid-js";
 import { isMobile, getBlacklist } from "../utils/helper";
 import FpJS from "@fingerprintjs/fingerprintjs";
+import { createSignal, createEffect, onMount } from "solid-js";
 
 log.setLevel(config.loglevel as log.LogLevelDesc);
 
@@ -17,19 +18,49 @@ const redirect = (loc: string) => {
 };
 
 export const Hero = () => {
-  const {
-    id,
-    fund,
-    secret,
-    setFund,
-    setNotification,
-    setNotificationType,
-    fpHash,
-    setFpHash,
-    blacklist,
-    setBlacklist,
-    t,
-  } = useGlobalContext();
+  const { id, fund, secret, setFund, setNotification, setNotificationType, t } =
+    useGlobalContext();
+
+  const [fpHash, setFpHash] = createSignal("");
+  const [blacklist, setBlacklist] = createSignal([]);
+  const [isValid, setIsValid] = createSignal(false);
+
+  // Load fingerprint and blacklist on mount
+  onMount(() => {
+    if (!fpHash()) {
+      FpJS.load()
+        .then((fp) => {
+          fp.get()
+            .then((result) => {
+              log.debug(result.visitorId);
+              setFpHash(result.visitorId);
+            })
+            .catch(() => {});
+        })
+        .catch(() => {});
+    }
+
+    getBlacklist()
+      .then((list) => {
+        setBlacklist(list.split(" "));
+      })
+      .catch(() => {});
+  });
+
+  // Validate whenever fpHash or blacklist changes
+  createEffect(() => {
+    const hash = fpHash();
+    const currentBlacklist = blacklist();
+
+    const valid =
+      config.network !== "mainnet" ||
+      (isMobile() &&
+        secret() === config.secret &&
+        !currentBlacklist.includes(hash));
+
+    log.debug("Valid:", valid);
+    setIsValid(valid);
+  });
 
   const handleClick = () => {
     if (fund()) {
@@ -91,32 +122,6 @@ export const Hero = () => {
           send(`Error: ${error}`);
         });
     }
-  };
-
-  if (!fpHash()) {
-    FpJS.load()
-      .then((fp) => {
-        fp.get()
-          .then((result) => {
-            log.debug(result.visitorId);
-            setFpHash(result.visitorId);
-          })
-          .catch(() => {});
-      })
-      .catch(() => {});
-  }
-
-  getBlacklist()
-    .then((list) => {
-      setBlacklist(list.split(" "));
-    })
-    .catch(() => {});
-
-  const isValid = () => {
-    return (
-      config.network != "mainnet" ||
-      (isMobile() && secret() == config.secret && !(fpHash() in blacklist()))
-    );
   };
 
   return (
