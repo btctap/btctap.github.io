@@ -4,9 +4,9 @@
 
 ## How this works
 
-BTC Tap is a great way to orange pill new people to use the amazing Coinos wallet. Tapping a phone on the NFC sticker and pressing 'Continue' will create a new fund with predefined amount of satoshis (env variable `VITE_GIFT_AMOUNT`) using the funding wallet's API token (`VITE_TOKEN`), then navigate to the gift link to receive the sats. The web app identifies valid visits via a secret parameter '?s=' (`VITE_SECRET`).
+BTC Tap is a fun way to orange pill your neighbours. Tapping a phone on the NFC sticker and pressing 'Continue' will create a new fund, using the funding wallet's API token (env variable `VITE_TOKEN`), with predefined amount of satoshis (`VITE_GIFT_AMOUNT`). The phone will then navigate to the Coinos web site to receive the sats. 
 
-Further taps on the tag by the same phone will just open the wallet. Private browser modes and non-mobile visits are invalid. Onboardings are reported via Telegram (`VITE_TELEGRAM_TOKEN` and `VITE_TELEGRAM_CHAT_ID`) to the benefactor. There is code obfuscation and fingerprint black list against some obvious attacks to drain your sats.
+The web app identifies valid visits via a secret parameter '?s=' (`VITE_SECRET`). Further taps on the tag by the same phone will just open the wallet. Private browser modes and non-mobile visits are invalid. Onboardings are reported to the benefactorvia Telegram (`VITE_TELEGRAM_TOKEN` and `VITE_TELEGRAM_CHAT_ID`). There is code obfuscation and fingerprint blacklist against some obvious attacks.
 
 ## How to prepare your stickers
 
