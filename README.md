@@ -18,14 +18,10 @@ The web app identifies valid visits via a secret parameter '?s=' (`VITE_SECRET`)
 
 4. When someone collects your sats, you will be notified by a Telegram message like this:
 
-`Fp: a72f0f9...710b85
-
-Id: tag_location
-
-Fund: coinos.io/fund/8c2b18...13569d7
-
-Paid: XXXX
-
-Balance: YYYYY`
+    Fp: a72f0f9...710b85
+    Id: tag_location
+    Fund: coinos.io/fund/8c2b18...13569d7
+    Paid: XXXX
+    Balance: YYYYY`
 
 ### Go orange pill your block!
