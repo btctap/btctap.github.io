@@ -18,7 +18,8 @@ const dict = {
     version: "Version",
     commithash: "Commit Hash",
     terms: "Terms",
-    wallet: "Wallet",
+    about: "About Coinos",
+    open_wallet: "Open wallet",
     map: "Map",
   },
   de: {
@@ -41,7 +42,8 @@ const dict = {
     version: "Version",
     commithash: "Commit Hash",
     terms: "Nutzungsbedingungen",
-    wallet: "Geldbörse",
+    about: "Von der Coinos",
+    open_wallet: "Wallet öffnen",
     map: "Karte",
   },
   es: {
@@ -63,7 +65,8 @@ const dict = {
     version: "Versión",
     commithash: "Commit Hash",
     terms: "Términos",
-    wallet: "Cartera",
+    about: "Sobre Coinos",
+    open_wallet: "Abrir cartera",
     map: "Mapa",
   },
   pt: {
@@ -85,7 +88,8 @@ const dict = {
     version: "Versão",
     commithash: "Hash do Commit",
     terms: "Termos",
-    wallet: "Carteira",
+    about: "Sobre o Coinos",
+    open_wallet: "Abrir carteira",
     map: "Mapa",
   },
   zh: {
@@ -106,7 +110,8 @@ const dict = {
     version: "版本",
     commithash: "提交哈希",
     terms: "条款",
-    wallet: "钱包",
+    about: "关于 Coinos",
+    open_wallet: "打开钱包",
     map: "地图",
   },
   ja: {
@@ -128,7 +133,8 @@ const dict = {
     version: "バージョン",
     commithash: "コミットハッシュ",
     terms: "利用規約",
-    wallet: "財布",
+    about: "Coinosについて",
+    open_wallet: "打开钱包",
     map: "地図",
   },
   ru: {
@@ -150,7 +156,8 @@ const dict = {
     version: "Версия",
     commithash: "Хэш коммита",
     terms: "Условия",
-    wallet: "Кошелек",
+    about: "О Coinos",
+    open_wallet: "Открыть кошелек",
     map: "Карта",
   },
 };

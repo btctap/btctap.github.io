@@ -59,7 +59,7 @@ const Nav = (props: { network: string }) => {
           </A>
           <Show when={config.walletUrl}>
             <a class="external" target="_blank" href={config.walletUrl}>
-              {t("wallet")}
+              {t("about")}
               <OcLinkexternal2 size={23} />
             </a>
           </Show>

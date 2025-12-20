@@ -97,8 +97,8 @@ const Terms: Component = () => {
         <a href="https://github.com/btctap/btctap.github.io/issues">
           Issues Page
         </a>
-        . The maintainers will do their best to address them. Any questions
-        about the Wallet should be addressed to its respective maintainers.
+        . Any questions about the Wallet should be addressed to its respective
+        maintainers.
       </p>
 
       <p class="last-updated">

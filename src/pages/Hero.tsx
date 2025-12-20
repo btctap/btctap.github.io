@@ -49,11 +49,11 @@ export const Hero = () => {
         }
       })
       .catch(() => {});
-    
+
     detectIncognito()
       .then((result) => {
-          log.debug(result.browserName, result.isPrivate);
-          setIsPrivate(result.isPrivate);
+        log.debug(result.browserName, result.isPrivate);
+        setIsPrivate(result.isPrivate);
       })
       .catch(() => {});
   });
@@ -66,11 +66,12 @@ export const Hero = () => {
 
     const valid =
       config.network !== "mainnet" ||
-      (isMobile() && !privateMode &&
+      fund() != "" ||
+      (isMobile() &&
+        !privateMode &&
         secret() === config.secret &&
         !currentBlacklist.includes(hash));
 
-    log.debug("Valid:", valid);
     setIsValid(valid);
   });
 
@@ -145,7 +146,7 @@ export const Hero = () => {
       <br />
       <Show when={isValid()}>
         <span class="btn btn-inline" onClick={() => handleClick()}>
-          {t("continue")}
+          {fund() ? t("open_wallet") : t("continue")}
         </span>
       </Show>
       <Show when={!isValid()}>

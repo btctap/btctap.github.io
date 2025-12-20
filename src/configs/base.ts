@@ -14,7 +14,7 @@ const defaults = {
   repoUrl: "https://github.com/btctap/btctap.github.io",
   myUrl: "https://btctap.github.io",
   mapUrl: "https://btcmap.org",
-  walletUrl: "https://coinos.io",
+  walletUrl: "https://" + import.meta.env.VITE_BACKEND,
 };
 
 const baseConfig: Config = defaults;
