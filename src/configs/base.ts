@@ -10,7 +10,7 @@ export type Config = {
 const defaults = {
   loglevel: "info" as log.LogLevelDesc,
   defaultLanguage: "en",
-  giftAmount: 21000,
+  giftAmount: import.meta.env.VITE_GIFT_AMOUNT,
   repoUrl: "https://github.com/btctap/btctap.github.io",
   myUrl: "https://btctap.github.io",
   mapUrl: "https://btcmap.org",

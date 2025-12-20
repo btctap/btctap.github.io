@@ -1,2 +1,6 @@
-TOKEN="your Coinos wallet's API token"
-SECRET="a secret that only NFC tags will know"
+VITE_BACKEND="coinos.io"
+VITE_GIFT_AMOUNT=100
+VITE_TOKEN="funding wallet's API token"
+VITE_SECRET="a secret that only NFC tag's url will have"
+VITE_TELEGRAM_TOKEN="run @BotFather to create a new bot"
+VITE_TELEGRAM_CHAT_ID="run @userinfobot to get it"

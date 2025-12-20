@@ -93,16 +93,13 @@ const Terms: Component = () => {
 
       <h2>5. Contact Info</h2>
       <p>
-        All problems with the Service should be reported at the repo's{" "}
-        <a href="https://github.com/btctap/btctap.github.io/issues">
-          Issues Page
-        </a>
-        . Any questions about the Wallet should be addressed to its respective
-        maintainers.
+        Any problems with the Service should be reported at the repo's Issues
+        Page. Any questions about the Wallet should be addressed to its
+        respective maintainers.
       </p>
 
       <p class="last-updated">
-        <strong>Last updated: December 19, 2025</strong>
+        <strong>Last updated: December 20, 2025</strong>
       </p>
     </div>
   );

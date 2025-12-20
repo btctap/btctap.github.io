@@ -52,6 +52,7 @@ jobs:
           VITE_TELEGRAM_CHAT_ID: ${{ secrets.VITE_TELEGRAM_CHAT_ID }}
           VITE_TELEGRAM_TOKEN: ${{ secrets.VITE_TELEGRAM_TOKEN }}
           VITE_TOKEN: ${{ secrets.VITE_TOKEN }}
+          VITE_GIFT_AMOUNT: ${{ secrets.VITE_GIFT_AMOUNT }}
         run: npm run build
         
       - name: Setup Pages

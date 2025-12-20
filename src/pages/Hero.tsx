@@ -58,19 +58,14 @@ export const Hero = () => {
       .catch(() => {});
   });
 
-  // Validate whenever fpHash or blacklist changes
   createEffect(() => {
-    const hash = fpHash();
-    const currentBlacklist = blacklist();
-    const privateMode = isPrivate();
-
     const valid =
       config.network !== "mainnet" ||
       fund() != "" ||
       (isMobile() &&
-        !privateMode &&
+        !isPrivate() &&
         secret() === config.secret &&
-        !currentBlacklist.includes(hash));
+        !blacklist().includes(fpHash()));
 
     setIsValid(valid);
   });
