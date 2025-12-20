@@ -24,4 +24,4 @@ The web app identifies valid visits via a secret parameter '?s=' (`VITE_SECRET`)
    Paid: XXXX  
    Balance: YYYYY
 
-###Go orange pill your block!###
+### Go orange pill your block!
