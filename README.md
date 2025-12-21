@@ -10,9 +10,9 @@ The web app identifies valid visits via a secret parameter '?s=' (`VITE_SECRET`)
 
 ## How to prepare your stickers
 
-1. Clone the repo. You may run it directly from github as `YOUR_REPO_TITLE.github.io` and adding all env variables as the repo secrets. VITE_SECRET will be some long random string. `VITE_BACKEND` is "coinos.io" unless you want to be the custodian yourself.
+1. Clone the repo. You may run it directly from github as `YOUR_GITHUB_ACCOUNT.github.io` and adding all env variables as the repo secrets. VITE_SECRET will be some long random string. `VITE_BACKEND` is "coinos.io" unless you want to be the custodian yourself.
 
-2. NFC Stickers (Ntag 213/215/216) can be programmed by [NFC Tools App](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en-US). Use the following URL format: `https://YOUR_REPO_TITLE.github.io/?s=VITE_SECRET&id=ID. The last parameter can code location of the sticker so you can track your donations. If you plan to put the tag on a metal surface use special "Anti Metal" type.
+2. NFC Stickers (Ntag 213/215/216) can be programmed by [NFC Tools App](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en-US). Use the following URL format: `https://YOUR_GITHUB_ACCOUNT.github.io/?s=VITE_SECRET&id=ID. The last parameter will code location of the sticker so you can track your donations. If you plan to stick the tag to a metal surface use special "Anti Metal" type.
 
 3. Cover the tag with a regular round sticker with [this](https://raw.githubusercontent.com/btctap/btctap.github.io/c28f8de034fcf29082fd41c0557e8dc875162af5/public/icon.svg) graphics or of your own design.
 
