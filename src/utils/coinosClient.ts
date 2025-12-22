@@ -1,4 +1,3 @@
-import { config } from "../config";
 import { fetcher } from "./helper";
 
 type Transaction = {
@@ -89,10 +88,11 @@ type UserProfile = {
 
 // pays an amount to a fund
 export const payToFund = async (
+  backend: string,
   fundId: string,
   amountSat: number,
 ): Promise<Transaction> => {
-  const res = await fetcher<Transaction>(true, config.backend, "payments", {
+  const res = await fetcher<Transaction>(true, backend, "payments", {
     fund: fundId,
     amount: amountSat,
   });
@@ -101,17 +101,17 @@ export const payToFund = async (
 };
 
 // get fund's balance and history
-export const getFund = async (fundId): Promise<FundResponse> => {
+export const getFund = async (backend: string, fundId: string): Promise<FundResponse> => {
   const res = await fetcher<FundResponse>(
     false,
-    config.backend,
+    backend,
     "fund/" + fundId,
   );
   return res;
 };
 
 // get account balance and details
-export const getMe = async (): Promise<UserProfile> => {
-  const res = await fetcher<UserProfile>(true, config.backend, "me");
+export const getMe = async (backend: string): Promise<UserProfile> => {
+  const res = await fetcher<UserProfile>(true, backend, "me");
   return res;
 };

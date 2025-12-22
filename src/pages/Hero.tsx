@@ -19,7 +19,7 @@ const redirect = (loc: string) => {
 };
 
 export const Hero = () => {
-  const { id, fund, secret, setFund, setNotification, setNotificationType, t } =
+  const { id, fund, secret, setFund, setNotification, setNotificationType, backend, setBackend, t } =
     useGlobalContext();
 
   const [fpHash, setFpHash] = createSignal("");
@@ -29,6 +29,12 @@ export const Hero = () => {
 
   // Load fingerprint and blacklist on mount
   onMount(() => {
+    // cookie to hold the wallet url
+    if (backend()=="") {
+      setBackend(config.backend);
+    }
+
+    // get browser fingerprint
     if (!fpHash()) {
       FpJS.load()
         .then((fp) => {
@@ -42,6 +48,7 @@ export const Hero = () => {
         .catch(() => {});
     }
 
+    // load fingerprints blacklist
     getBlacklist()
       .then((list) => {
         if (list) {
@@ -50,6 +57,7 @@ export const Hero = () => {
       })
       .catch(() => {});
 
+    // check incognito mode
     detectIncognito()
       .then((result) => {
         log.debug(result.browserName, result.isPrivate);
@@ -73,15 +81,15 @@ export const Hero = () => {
   const handleClick = () => {
     if (fund()) {
       // user was onboarded before, check the fund
-      getFund(fund())
+      getFund(backend(), fund())
         .then((data) => {
           if (data.amount > 0) {
             // fund has money, redirect to sweep
-            redirect(`https://${config.backend}/fund/${fund()}/sweep`);
+            redirect(`https://${backend()}/fund/${fund()}/sweep`);
           } else {
             // fund is empty, redirect to the user account
             redirect(
-              `https://${config.backend}/${data.payments[0].user.username}`,
+              `https://${backend()}/${data.payments[0].user.username}`,
             );
           }
           return;
@@ -98,14 +106,14 @@ export const Hero = () => {
       log.info("New fund id is", fundId);
 
       const amount = config.giftAmount;
-      payToFund(fundId, amount)
+      payToFund(backend(), fundId, amount)
         .then((data) => {
           if (data) {
             // save the fund id as a cookie
             setFund(fundId);
             // get remaining balance
             let myBalance = 0;
-            getMe()
+            getMe(backend())
               .then((data) => {
                 myBalance = data.balance;
               })
@@ -114,7 +122,7 @@ export const Hero = () => {
               })
               .finally(() => {
                 // send a telegram
-                const telegram_message = `Fp: ${fpHash()}\nId: ${id()}\nFund: ${config.backend}/fund/${fund()}\nPaid: ${amount}\nBalance: ${myBalance}`;
+                const telegram_message = `Fp: ${fpHash()}\nId: ${id()}\nFund: ${backend()}/fund/${fund()}\nPaid: ${amount}\nBalance: ${myBalance}`;
                 send(telegram_message);
                 // redirect to sweep
                 redirect(`https://${config.backend}/fund/${fund()}/sweep`);

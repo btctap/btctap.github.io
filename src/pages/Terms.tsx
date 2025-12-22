@@ -8,18 +8,10 @@ const Terms: Component = () => {
       <h1>Terms of Service</h1>
       <h2>1. Introduction</h2>
       <p>
-        BTC Tap is not a legal entity, but an open source code hosted on Github.
+        BTC Tap is an open source code hosted on Github.
         The maintainers of the code and the benefactors (hereinafter, the "We")
         of the gifted Bitcoin (the "Funds") are anonymous. Coinos (the "Wallet")
-        is an unaffiliated open source custodial Bitcoin wallet that can be
-        hosted{" "}
-        <a
-          href="https://github.com/coinos/coinos-ui?tab=readme-ov-file#coinos"
-          target="_blank"
-        >
-          anywhere
-        </a>
-        . Please read these Terms of Service (the "Terms") carefully before
+        is an unaffiliated open source web-based Bitcoin wallet project. Please read these Terms of Service (the "Terms") carefully before
         accepting the Funds and creating the Wallet (the "Service"). If you do
         not agree with these Terms or any of its clauses, you should not
         proceed.
@@ -99,7 +91,7 @@ const Terms: Component = () => {
       </p>
 
       <p class="last-updated">
-        <strong>Last updated: December 20, 2025</strong>
+        <strong>Last updated: December 22, 2025</strong>
       </p>
     </div>
   );
