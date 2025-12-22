@@ -82,7 +82,6 @@ const GlobalProvider = (props: { children: JSX.Element }) => {
     },
   );
 
-
   const [i18nConfigured, setI18nConfigured] = makePersisted(
     // eslint-disable-next-line solid/reactivity
     createSignal(null),

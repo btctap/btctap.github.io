@@ -101,12 +101,11 @@ export const payToFund = async (
 };
 
 // get fund's balance and history
-export const getFund = async (backend: string, fundId: string): Promise<FundResponse> => {
-  const res = await fetcher<FundResponse>(
-    false,
-    backend,
-    "fund/" + fundId,
-  );
+export const getFund = async (
+  backend: string,
+  fundId: string,
+): Promise<FundResponse> => {
+  const res = await fetcher<FundResponse>(false, backend, "fund/" + fundId);
   return res;
 };
 

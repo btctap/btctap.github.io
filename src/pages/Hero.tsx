@@ -19,8 +19,17 @@ const redirect = (loc: string) => {
 };
 
 export const Hero = () => {
-  const { id, fund, secret, setFund, setNotification, setNotificationType, backend, setBackend, t } =
-    useGlobalContext();
+  const {
+    id,
+    fund,
+    secret,
+    setFund,
+    setNotification,
+    setNotificationType,
+    backend,
+    setBackend,
+    t,
+  } = useGlobalContext();
 
   const [fpHash, setFpHash] = createSignal("");
   const [blacklist, setBlacklist] = createSignal([]);
@@ -30,7 +39,7 @@ export const Hero = () => {
   // Load fingerprint and blacklist on mount
   onMount(() => {
     // cookie to hold the wallet url
-    if (backend()=="") {
+    if (backend() == "") {
       setBackend(config.backend);
     }
 
@@ -88,9 +97,7 @@ export const Hero = () => {
             redirect(`https://${backend()}/fund/${fund()}/sweep`);
           } else {
             // fund is empty, redirect to the user account
-            redirect(
-              `https://${backend()}/${data.payments[0].user.username}`,
-            );
+            redirect(`https://${backend()}/${data.payments[0].user.username}`);
           }
           return;
         })
