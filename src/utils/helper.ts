@@ -5,7 +5,7 @@ export const isIos = () =>
   !!navigator.userAgent.match(/iphone|ipad/gi) || false;
 
 export const isMobile = () =>
-  isIos() || !!navigator.userAgent.match(/android|blackberry/gi) || true;
+  isIos() || !!navigator.userAgent.match(/android|blackberry/gi) || false;
 
 export const requestTimeoutDuration = 5_000;
 
