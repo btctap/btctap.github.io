@@ -36,6 +36,12 @@ export const Hero = () => {
 
   // Load fingerprint and blacklist on mount
   onMount(() => {
+    if (config.recaptchaSiteKey) {
+      const s = document.createElement("script");
+      s.src =
+        "https://www.google.com/recaptcha/api.js?render=" + config.recaptchaSiteKey;
+      document.head.appendChild(s);
+    }
     // get browser fingerprint
     if (!fpHash()) {
       FpJS.load()

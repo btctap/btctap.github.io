@@ -11,6 +11,7 @@ const defaults = {
   loglevel: "info" as log.LogLevelDesc,
   defaultLanguage: "en",
   backend: import.meta.env.VITE_BACKEND,
+  recaptchaSiteKey: import.meta.env.VITE_RECAPTCHA,
   username: import.meta.env.VITE_USERNAME,
   password: import.meta.env.VITE_PASSWORD,
   giftAmount: import.meta.env.VITE_GIFT_AMOUNT,
