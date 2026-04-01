@@ -85,8 +85,7 @@ export const Hero = () => {
         secret() === config.secret &&
         !blacklist().includes(fpHash()));
 
-    // setIsValid(valid);
-    setIsValid(true);
+    setIsValid(valid);
   });
 
   const handleClick = () => {
