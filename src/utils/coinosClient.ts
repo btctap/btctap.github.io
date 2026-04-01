@@ -1,4 +1,5 @@
 import { fetcher } from "./helper";
+import { config } from "../config";
 
 type Transaction = {
   id: string;
@@ -55,6 +56,11 @@ export type FundResponse = {
   payments: Payment[];
 };
 
+type LoginResponse = {
+  user: string[];
+  token: string;
+};
+
 type UserProfile = {
   about: string;
   autowithdraw: boolean;
@@ -88,11 +94,10 @@ type UserProfile = {
 
 // pays an amount to a fund
 export const payToFund = async (
-  backend: string,
   fundId: string,
   amountSat: number,
 ): Promise<Transaction> => {
-  const res = await fetcher<Transaction>(true, backend, "payments", {
+  const res = await fetcher<Transaction>(true, "payments", {
     fund: fundId,
     amount: amountSat,
   });
@@ -102,15 +107,23 @@ export const payToFund = async (
 
 // get fund's balance and history
 export const getFund = async (
-  backend: string,
   fundId: string,
 ): Promise<FundResponse> => {
-  const res = await fetcher<FundResponse>(false, backend, "fund/" + fundId);
+  const res = await fetcher<FundResponse>(false, "fund/" + fundId);
   return res;
 };
 
 // get account balance and details
-export const getMe = async (backend: string): Promise<UserProfile> => {
-  const res = await fetcher<UserProfile>(true, backend, "me");
+export const getMe = async (): Promise<UserProfile> => {
+  const res = await fetcher<UserProfile>(true, "me");
   return res;
+};
+
+// login to account
+export const getToken = async (): Promise<string> => {
+  const res = await fetcher<LoginResponse>(false, "login", {
+    username: config.username,
+    password: config.password,
+  });
+  return res.token;
 };

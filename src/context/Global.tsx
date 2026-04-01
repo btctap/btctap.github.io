@@ -32,8 +32,6 @@ export type GlobalContextType = {
   setFund: Setter<string>;
   secret: Accessor<string>;
   setSecret: Setter<string>;
-  backend: Accessor<string>;
-  setBackend: Setter<string>;
   i18n: Accessor<string | null>;
   setI18n: Setter<string | null>;
   i18nConfigured: Accessor<string | null>;
@@ -74,14 +72,7 @@ const GlobalProvider = (props: { children: JSX.Element }) => {
       name: "fund",
     },
   );
-  const [backend, setBackend] = makePersisted(
-    // eslint-disable-next-line solid/reactivity
-    createSignal<string>(""),
-    {
-      name: "backend",
-    },
-  );
-
+  
   const [i18nConfigured, setI18nConfigured] = makePersisted(
     // eslint-disable-next-line solid/reactivity
     createSignal(null),
@@ -151,8 +142,6 @@ const GlobalProvider = (props: { children: JSX.Element }) => {
         setNotificationType,
         fund,
         setFund,
-        backend,
-        setBackend,
         id,
         setId,
         secret,

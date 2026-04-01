@@ -57,12 +57,10 @@ const Nav = (props: { network: string }) => {
           <A href="/terms" onClick={() => setHamburger(false)}>
             {t("terms")}
           </A>
-          <Show when={config.walletUrl}>
-            <a class="external" target="_blank" href={config.walletUrl}>
-              {t("about")}
-              <OcLinkexternal2 size={23} />
-            </a>
-          </Show>
+          <a class="external" target="_blank" href={config.backend}>
+            {t("about")}
+            <OcLinkexternal2 size={23} />
+          </a>
           <Show when={config.mapUrl}>
             <a class="external" target="_blank" href={config.mapUrl}>
               {t("map")}

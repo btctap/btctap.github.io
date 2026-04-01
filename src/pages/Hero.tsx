@@ -2,7 +2,7 @@ import { config } from "../config";
 import { useGlobalContext } from "../context/Global";
 import "../style/hero.scss";
 import { v4 as uuidv4 } from "uuid";
-import { getFund, getMe, payToFund } from "../utils/coinosClient";
+import { getToken, getFund, getMe, payToFund } from "../utils/coinosClient";
 import { send } from "../utils/telegram";
 import log from "loglevel";
 import { Show } from "solid-js";
@@ -26,8 +26,6 @@ export const Hero = () => {
     setFund,
     setNotification,
     setNotificationType,
-    backend,
-    setBackend,
     t,
   } = useGlobalContext();
 
@@ -38,11 +36,6 @@ export const Hero = () => {
 
   // Load fingerprint and blacklist on mount
   onMount(() => {
-    // cookie to hold the wallet url
-    if (backend() == "") {
-      setBackend(config.backend);
-    }
-
     // get browser fingerprint
     if (!fpHash()) {
       FpJS.load()
@@ -90,14 +83,14 @@ export const Hero = () => {
   const handleClick = () => {
     if (fund()) {
       // user was onboarded before, check the fund
-      getFund(backend(), fund())
+      getFund(fund())
         .then((data) => {
           if (data.amount > 0) {
             // fund has money, redirect to sweep
-            redirect(`https://${backend()}/fund/${fund()}/sweep`);
+            redirect(`${config.backend}/fund/${fund()}/sweep`);
           } else {
             // fund is empty, redirect to the user account
-            redirect(`https://${backend()}/${data.payments[0].user.username}`);
+            redirect(`${config.backend}/${data.payments[0].user.username}`);
           }
           return;
         })
@@ -108,37 +101,55 @@ export const Hero = () => {
           return handleClick();
         });
     } else {
-      // generate new fund id
-      const fundId = uuidv4();
-      log.info("New fund id is", fundId);
-
-      const amount = config.giftAmount;
-      payToFund(backend(), fundId, amount)
-        .then((data) => {
-          if (data) {
-            // save the fund id as a cookie
-            setFund(fundId);
-            // get remaining balance
-            let myBalance = 0;
-            getMe(backend())
-              .then((data) => {
-                myBalance = data.balance;
-              })
-              .catch((error) => {
-                log.error("Error getting me:", error);
-              })
-              .finally(() => {
-                // send a telegram
-                const telegram_message = `Fp: ${fpHash()}\nId: ${id()}\nFund: ${backend()}/fund/${fund()}\nPaid: ${amount}\nBalance: ${myBalance}`;
-                send(telegram_message);
-                // redirect to sweep
-                redirect(`https://${config.backend}/fund/${fund()}/sweep`);
-              });
+      // login
+      getToken()
+        .then((token) => {
+          if (!token) {
+            throw new Error("unable to login");
           }
+
+          config.token = token;
+            
+          // generate new fund id
+          const fundId = uuidv4();
+          log.info("New fund id is", fundId);
+
+          const amount = config.giftAmount;
+          payToFund(fundId, amount)
+            .then((data) => {
+              if (data) {
+                // get remaining balance
+                let myBalance = 0;
+                getMe()
+                  .then((data) => {
+                    myBalance = data.balance;
+                  })
+                  .catch((error) => {
+                    log.error("Error getting me:", error);
+                  })
+                  // eslint-disable-next-line solid/reactivity
+                  .finally(() => {
+                    // send a telegram
+                    const telegram_message = `Fp: ${fpHash()}\nId: ${id()}\nFund: ${config.backend}/fund/${fundId}\nPaid: ${amount}\nBalance: ${myBalance}`;
+                    send(telegram_message);
+                    // save the fund id as a cookie
+                    setFund(fundId);
+                    // redirect to sweep
+                    redirect(`${config.backend}/fund/${fundId}/sweep`);
+                  });
+              }
+            })
+            .catch((error) => {
+              log.error("Error paying to the fund:", error);
+              // redirect to Coinos main page
+              setNotificationType("error");
+              setNotification(t("api_offline_msg"));
+              // send a telegram
+              send(`Error: ${error}`);
+            });
         })
         .catch((error) => {
-          log.error("Error paying to the fund:", error);
-          // redirect to Coinos main page
+          log.error("Error logging in:", error);
           setNotificationType("error");
           setNotification(t("api_offline_msg"));
           // send a telegram

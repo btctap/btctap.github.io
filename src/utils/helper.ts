@@ -9,8 +9,8 @@ export const isMobile = () =>
 
 export const requestTimeoutDuration = 5_000;
 
-export const getApiUrl = (backend: string): string => {
-  return "https://" + backend + "/api/";
+export const getApiUrl = (): string => {
+  return config.backend + "/api/";
 };
 
 export const getBlacklist = async (): Promise<string> => {
@@ -51,7 +51,6 @@ export const getBlacklist = async (): Promise<string> => {
 
 export const fetcher = async <T = unknown>(
   withAuth: boolean,
-  backend: string,
   url: string,
   params?: Record<string, unknown>,
 ): Promise<T> => {
@@ -75,9 +74,16 @@ export const fetcher = async <T = unknown>(
         signal: controller.signal,
         ...(params ? { method: "POST", body: JSON.stringify(params) } : null),
       };
+    } else if (params) {
+      opts = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(params),
+        signal: controller.signal,
+      };
     }
 
-    const apiUrl = getApiUrl(backend) + url;
+    const apiUrl = getApiUrl() + url;
     const response = await fetch(apiUrl, opts);
 
     if (!response.ok) {
