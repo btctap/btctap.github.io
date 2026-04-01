@@ -121,9 +121,14 @@ export const getMe = async (): Promise<UserProfile> => {
 
 // login to account
 export const getToken = async (): Promise<string> => {
+  await new Promise<void>(resolve => {
+    grecaptcha.ready(resolve);
+  });
+  const recaptcha = await grecaptcha.execute(config.recaptchaSiteKey, { action: 'submit' });
   const res = await fetcher<LoginResponse>(false, "login", {
     username: config.username,
     password: config.password,
+    recaptcha,
   });
   return res.token;
 };

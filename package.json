@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@fingerprintjs/fingerprintjs": "^5.0.1",
+    "@types/grecaptcha": "^3.0.9",
     "@types/loglevel": "^1.5.4",
     "@types/node": "^25.0.2",
     "axios": "^1.13.2",
