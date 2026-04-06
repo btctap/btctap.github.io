@@ -47,7 +47,7 @@ const Nav = (props: { network: string }) => {
             <For each={Object.keys(locales)}>
               {(lang) => (
                 <span class="lang" onClick={() => setI18nConfigured(lang)}>
-                  {locales[lang].language}
+                  {locales[lang as keyof typeof locales].language}
                 </span>
               )}
             </For>

@@ -43,7 +43,7 @@ export const getBlacklist = async (): Promise<string> => {
     }
     return await response.text();
   } catch (e) {
-    throw new Error(e);
+    throw new Error(String(e));
   } finally {
     clearTimeout(requestTimeout);
   }
@@ -102,7 +102,7 @@ export const fetcher = async <T = unknown>(
     }
     return (await response.json()) as T;
   } catch (e) {
-    throw new Error(e);
+    throw new Error(String(e));
   } finally {
     clearTimeout(requestTimeout);
   }

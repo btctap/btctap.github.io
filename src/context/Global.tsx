@@ -47,8 +47,8 @@ export type GlobalContextType = {
 
 // Local storage serializer to support the values created by the deprecated "createStorageSignal"
 const stringSerializer = {
-  serialize: (value: never) => value,
-  deserialize: (value: never) => value,
+  serialize: (value: string | null): string => value ?? "",
+  deserialize: (value: string): string | null => value || null,
 };
 
 const GlobalContext = createContext<GlobalContextType>();
@@ -61,9 +61,9 @@ const GlobalProvider = (props: { children: JSX.Element }) => {
 
   const [i18n, setI18n] = createSignal<string | null>(null);
 
-  const [id, setId] = createSignal<string | null>(null);
+  const [id, setId] = createSignal<string>("");
 
-  const [secret, setSecret] = createSignal<string | null>(null);
+  const [secret, setSecret] = createSignal<string>("");
 
   const [fund, setFund] = makePersisted(
     // eslint-disable-next-line solid/reactivity
@@ -75,7 +75,7 @@ const GlobalProvider = (props: { children: JSX.Element }) => {
   
   const [i18nConfigured, setI18nConfigured] = makePersisted(
     // eslint-disable-next-line solid/reactivity
-    createSignal(null),
+    createSignal<string | null>(null),
     {
       name: "i18n",
       ...stringSerializer,
@@ -116,10 +116,10 @@ const GlobalProvider = (props: { children: JSX.Element }) => {
     setI18n(detectLanguage(i18nConfigured() || i18nUrl()));
   });
   const dictLocale = createMemo(
-    () => flatten(dict[i18n() || config.defaultLanguage]) as never,
+    () => flatten(dict[(i18n() || config.defaultLanguage) as keyof typeof dict]) as Record<string, string>,
   );
 
-  setI18n(detectLanguage(i18nConfigured(), i18nUrl(), setI18nUrl));
+  setI18n(detectLanguage(i18nConfigured(), i18nUrl(), setI18nUrl as Setter<string>));
 
   // eslint-disable-next-line solid/reactivity
   const t = translator(dictLocale, resolveTemplate) as (

@@ -30,7 +30,7 @@ export const Hero = () => {
   } = useGlobalContext();
 
   const [fpHash, setFpHash] = createSignal("");
-  const [blacklist, setBlacklist] = createSignal([]);
+  const [blacklist, setBlacklist] = createSignal<string[]>([]);
   const [isValid, setIsValid] = createSignal(false);
   const [isPrivate, setIsPrivate] = createSignal(false);
 
@@ -121,9 +121,12 @@ export const Hero = () => {
           // generate new fund id
           const fundId = uuidv4();
           log.info("New fund id is", fundId);
+          
+          // save the fund id as a cookie
+          setFund(fundId);
 
           const amount = config.giftAmount;
-          payToFund(fundId, amount)
+          payToFund(fund(), amount)
             .then((data) => {
               if (data) {
                 // get remaining balance
@@ -138,12 +141,10 @@ export const Hero = () => {
                   // eslint-disable-next-line solid/reactivity
                   .finally(() => {
                     // send a telegram
-                    const telegram_message = `Fp: ${fpHash()}\nId: ${id()}\nFund: ${config.backend}/fund/${fundId}\nPaid: ${amount}\nBalance: ${myBalance}`;
+                    const telegram_message = `Fp: ${fpHash()}\nId: ${id()}\nFund: ${config.backend}/fund/${fund()}\nPaid: ${amount}\nBalance: ${myBalance}`;
                     send(telegram_message);
-                    // save the fund id as a cookie
-                    setFund(fundId);
                     // redirect to sweep
-                    redirect(`${config.backend}/fund/${fundId}/sweep`);
+                    redirect(`${config.backend}/fund/${fund()}/sweep`);
                   });
               }
             })
@@ -175,7 +176,7 @@ export const Hero = () => {
       <br />
       <Show when={isValid()}>
         <span class="btn btn-inline" onClick={() => handleClick()}>
-          {fund() ? t("open_wallet") : t("continue")}
+          {t("continue")}
         </span>
       </Show>
       <Show when={!isValid()}>

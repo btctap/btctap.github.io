@@ -3,7 +3,7 @@ export const formatError = (message: unknown): string => {
     return message;
   }
 
-  if (typeof message === "object") {
+  if (typeof message === "object" && message !== null) {
     const msgObj = message as Record<string, unknown>;
 
     if (typeof msgObj.error === "object") {

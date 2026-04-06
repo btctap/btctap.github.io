@@ -176,8 +176,9 @@ Object.entries(dict)
   .filter(([lang]) => lang !== "en")
   .map(([, langDict]) => {
     Object.entries(dict.en).map(([key, enVal]) => {
-      if (langDict[key] === undefined) {
-        langDict[key] = enVal;
+      const k = key as keyof typeof dict.en;
+      if (langDict[k] === undefined) {
+        langDict[k] = enVal;
       }
     });
   });

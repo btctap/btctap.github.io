@@ -41,7 +41,7 @@ export const detectLanguage = (
     if (urlParam) {
       if (isValidLang(urlParam)) {
         log.info("Using language URL parameter:", urlParam);
-        setI18nUrl(urlParam);
+        setI18nUrl?.(urlParam);
         return urlParam;
       } else {
         log.warn("Invalid language URL parameter:", urlParam);

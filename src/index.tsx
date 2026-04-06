@@ -38,7 +38,7 @@ const base = "/";
 const App = (props: RouteSectionProps) => {
   return (
     <GlobalProvider>
-      <Nav network={config.network} />
+      <Nav network={config.network ?? ""} />
       {props.children}
       <Notification />
       <Footer />
@@ -55,7 +55,7 @@ const cleanup = render(
       <Route path="*404" component={NotFound} />
     </Router>
   ),
-  document.getElementById("root"),
+  document.getElementById("root")!,
 );
 
 if (import.meta.hot) {
