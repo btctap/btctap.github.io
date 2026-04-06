@@ -122,13 +122,13 @@ export const Hero = () => {
           const fundId = uuidv4();
           log.info("New fund id is", fundId);
           
-          // save the fund id as a cookie
-          setFund(fundId);
-
           const amount = config.giftAmount;
-          payToFund(fund(), amount)
+          payToFund(fundId, amount)
             .then((data) => {
               if (data) {
+                // save the fund id as a cookie
+                setFund(fundId);
+
                 // get remaining balance
                 let myBalance = 0;
                 getMe()
