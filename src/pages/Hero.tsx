@@ -150,11 +150,26 @@ export const Hero = () => {
             })
             .catch((error) => {
               log.error("Error paying to the fund:", error);
-              // redirect to Coinos main page
-              setNotificationType("error");
-              setNotification(t("api_offline_msg"));
-              // send a telegram
-              send(`Error: ${error}`);
+              // network may have dropped after server processed the payment,
+              // check if the fund was actually created before giving up
+              getFund(fundId)
+                .then((data) => {
+                  if (data.payments.length > 0) {
+                    log.info("Fund exists despite network error, recovering");
+                    setFund(fundId);
+                    send(`Recovered fund after network error.\nFund: ${config.backend}/fund/${fundId}`);
+                    redirect(`${config.backend}/fund/${fundId}/sweep`);
+                  } else {
+                    setNotificationType("error");
+                    setNotification(t("api_offline_msg"));
+                    send(`Error: ${error}`);
+                  }
+                })
+                .catch(() => {
+                  setNotificationType("error");
+                  setNotification(t("api_offline_msg"));
+                  send(`Error: ${error}`);
+                });
             });
         })
         .catch((error) => {
