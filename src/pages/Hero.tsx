@@ -1,6 +1,7 @@
 import { config } from "../config";
 import { useGlobalContext } from "../context/Global";
 import "../style/hero.scss";
+import "../style/loadingSpinner.scss";
 import { v4 as uuidv4 } from "uuid";
 import { getToken, getFund, getMe, payToFund } from "../utils/coinosClient";
 import { send } from "../utils/telegram";
@@ -33,6 +34,7 @@ export const Hero = () => {
   const [blacklist, setBlacklist] = createSignal<string[]>([]);
   const [isValid, setIsValid] = createSignal(false);
   const [isPrivate, setIsPrivate] = createSignal(false);
+  const [isLoading, setIsLoading] = createSignal(false);
 
   // Load fingerprint and blacklist on mount
   onMount(() => {
@@ -89,6 +91,7 @@ export const Hero = () => {
   });
 
   const handleClick = () => {
+    setIsLoading(true);
     if (fund()) {
       // user was onboarded before, check the fund
       getFund(fund())
@@ -104,8 +107,8 @@ export const Hero = () => {
         })
         .catch((error) => {
           log.error("Error getting the fund:", error);
-          // reset fund Id
           setFund("");
+          setIsLoading(false);
           return handleClick();
         });
     } else {
@@ -160,12 +163,14 @@ export const Hero = () => {
                     send(`Recovered fund after network error.\nFund: ${config.backend}/fund/${fundId}`);
                     redirect(`${config.backend}/fund/${fundId}/sweep`);
                   } else {
+                    setIsLoading(false);
                     setNotificationType("error");
                     setNotification(t("api_offline_msg"));
                     send(`Error: ${error}`);
                   }
                 })
                 .catch(() => {
+                  setIsLoading(false);
                   setNotificationType("error");
                   setNotification(t("api_offline_msg"));
                   send(`Error: ${error}`);
@@ -174,9 +179,9 @@ export const Hero = () => {
         })
         .catch((error) => {
           log.error("Error logging in:", error);
+          setIsLoading(false);
           setNotificationType("error");
           setNotification(t("api_offline_msg"));
-          // send a telegram
           send(`Error: ${error}`);
         });
     }
@@ -190,9 +195,17 @@ export const Hero = () => {
       <p>{t("description")}</p>
       <br />
       <Show when={isValid()}>
-        <span class="btn btn-inline" onClick={() => handleClick()}>
-          {t("continue")}
-        </span>
+        <Show when={isLoading()} fallback={
+          <span class="btn btn-inline" onClick={() => handleClick()}>
+            {t("continue")}
+          </span>
+        }>
+          <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+        </Show>
       </Show>
       <Show when={!isValid()}>
         <h3>{t("no_nfc")}</h3>
